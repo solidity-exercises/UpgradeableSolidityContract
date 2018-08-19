@@ -1,11 +1,10 @@
-var TestOwnableImplementation = artifacts.require("./TestOwnableImplementation.sol");
-var TestOwnableImplementation2 = artifacts.require("./TestOwnableImplementation2.sol");
-var TestProxy = artifacts.require("./TestProxy.sol");
+var OwnableImplementation = artifacts.require("./OwnableImplementation.sol");
+var OwnableImplementation2 = artifacts.require("./OwnableImplementation2.sol");
+var TestProxy = artifacts.require("../contracts/Upgradeability/UpgradeableProxy.sol");
 
 module.exports = async function (deployer) {
-
-    await deployer.deploy(TestOwnableImplementation);
-    let TestOwnableImplementationInstance = await TestOwnableImplementation.deployed();
-    await deployer.deploy(TestOwnableImplementation2);
-    await deployer.deploy(TestProxy, TestOwnableImplementationInstance.address);
+    await deployer.deploy(OwnableImplementation);
+    let OwnableImplementationInstance = await OwnableImplementation.deployed();
+    await deployer.deploy(OwnableImplementation2);
+    await deployer.deploy(TestProxy, OwnableImplementationInstance.address);
 };

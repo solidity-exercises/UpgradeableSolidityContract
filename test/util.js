@@ -1,4 +1,4 @@
-const util = {
+module.exports = {
 	expectThrow: async promise => {
 		try {
 			let result = await promise;
@@ -35,6 +35,3 @@ const util = {
 		})
 	}
 }
-
-
-module.exports = util;

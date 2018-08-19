@@ -1,10 +1,12 @@
-pragma solidity ^0.4.23;
+pragma solidity 0.4.24;
 
 
 /**
  * @title Ownable
- * @dev The Ownable contract has an owner address, and provides basic authorization control
- * functions, this simplifies the implementation of "user permissions".
+ * @dev The NotInitedOwnable contract has an owner address, and provides 
+ * basic authorization control functions,
+ * this simplifies the implementation of "user permissions".
+ * @notice This contract needs to be inited after deployment for proper use.
  */
 contract NotInitedOwnable {
     address public owner;
@@ -20,14 +22,6 @@ contract NotInitedOwnable {
     }
 
     /**
-     * @dev Throws if called when the owner has not been set yet.
-     */
-    modifier ownerSet() {
-        require(owner != address(0), "Contract does not has owner");
-        _;
-    }
-
-    /**
     * @dev Initializes the contract and inits with the msg sender as an owner
     * account.
     */
@@ -38,11 +32,11 @@ contract NotInitedOwnable {
 
     /**
      * @dev Allows the current owner to transfer control of the contract to a newOwner.
-     * @param newOwner The address to transfer ownership to.
+     * @param _newOwner The address to transfer ownership to.
      */
-    function transferOwnership(address newOwner) public ownerSet onlyOwner  {
-        require(newOwner != address(0), "newOwner address is 0");
-        emit OwnershipTransferred(owner, newOwner);
-        owner = newOwner;
+    function transferOwnership(address _newOwner) public onlyOwner  {
+        require(_newOwner != address(0), "_newOwner address can not be 0");
+        emit OwnershipTransferred(owner, _newOwner);
+        owner = _newOwner;
     }
 }

@@ -1,10 +1,9 @@
-var TestImpl1 = artifacts.require("./TestImpl1.sol");
-var TestImpl2 = artifacts.require("./TestImpl2.sol");
-var TestProxy = artifacts.require("./TestProxy.sol");
+var Implementation = artifacts.require("./Implementation.sol");
+var Implementation2 = artifacts.require("./Implementation2.sol");
+var TestProxy = artifacts.require("../contracts/Upgradeability/UpgradeableProxy.sol");
 
 module.exports = async function (deployer) {
-
-	await deployer.deploy(TestImpl1);
-	await deployer.deploy(TestImpl2);
-	await deployer.deploy(TestProxy, TestImpl1.address);
+	await deployer.deploy(Implementation);
+	await deployer.deploy(Implementation2);
+	await deployer.deploy(TestProxy, Implementation.address);
 };
